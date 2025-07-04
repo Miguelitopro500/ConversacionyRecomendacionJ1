@@ -59,3 +59,24 @@ function mostrarRecomendaciones() {
   html += "</ul>";
   document.getElementById("listaRecomendaciones").innerHTML = html;
 }
+
+
+function guardarNoticia() {
+  const contenidoHTML = document.getElementById("noticiaInput").value.trim();
+  if (contenidoHTML) {
+    localStorage.setItem("noticiaHTML", contenidoHTML);
+    mostrarNoticia();
+    document.getElementById("noticiaInput").value = "";
+  }
+}
+
+function mostrarNoticia() {
+  const noticia = localStorage.getItem("noticiaHTML") || "<p>No hay noticias publicadas aún.</p>";
+  document.getElementById("noticiaPublicada").innerHTML = noticia;
+}
+
+
+window.onload = function () {
+  // ...otras funciones como mostrarMensajes()
+  mostrarNoticia();
+};
