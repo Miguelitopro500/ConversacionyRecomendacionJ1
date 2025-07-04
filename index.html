@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mini Chat con Recomendaciones</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>💬 Conversa y Recomienda</h1>
+  </header>
+
+  <section id="usuario">
+    <h2>Tu nombre de usuario</h2>
+    <input type="text" id="username" placeholder="Ingresa tu nombre" />
+    <button onclick="guardarUsuario()">Guardar</button>
+    <p id="nombreGuardado"></p>
+  </section>
+
+  <section id="chat">
+    <h2>🌐 Chat en la página</h2>
+    <div id="mensajes"></div>
+    <input type="text" id="mensajeInput" placeholder="Escribe tu mensaje" />
+    <button onclick="enviarMensaje()">Enviar</button>
+  </section>
+
+  <section id="recomendaciones">
+    <h2>🌟 Comentarios de Recomendaciones</h2>
+    <textarea id="recomendacionInput" placeholder="¿Qué recomiendas hoy?"></textarea>
+    <button onclick="enviarRecomendacion()">Publicar</button>
+    <div id="listaRecomendaciones"></div>
+  </section>
+
+  <footer>
+    <p>Creado por MiguelitoEdits &copy; 2025</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
