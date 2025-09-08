@@ -2,78 +2,115 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Mini Chat con Recomendaciones</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Sitio Ecuatoriano</title>
+  <style>
+    body { margin: 0; font-family: sans-serif; background: #f5f5f5; color: #222; }
+    header { background: linear-gradient(to right, #0033a0, #ed1c24, #ffffff); color: white; text-align: center; padding: 30px; position: relative; }
+    header img { position: absolute; top: 10px; right: 10px; width: 60px; }
+    nav { background: #0033a0; display: flex; justify-content: center; gap: 10px; padding: 10px; }
+    nav button, .subnav button {
+      background: #ed1c24; border: none; color: white; padding: 8px 16px;
+      font-weight: bold; border-radius: 5px; cursor: pointer;
+    }
+    .section, .subsection {
+      display: none; padding: 20px; animation: fade 0.5s ease;
+    }
+    .active { display: block; }
+    .subnav { margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .noticia {
+      background: #fff; border-left: 5px solid #0033a0;
+      padding: 15px; margin-bottom: 15px; border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .galeria img {
+      width: 200px; margin: 10px; border-radius: 8px;
+      transition: transform 0.3s;
+    }
+    .galeria img:hover { transform: scale(1.05); }
+    video {
+      width: 100%; max-width: 600px; border-radius: 10px;
+      border: 3px solid #ed1c24;
+    }
+    footer {
+      background: #ed1c24; color: white; text-align: center; padding: 20px;
+    }
+    @keyframes fade { from {opacity: 0;} to {opacity: 1;} }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>💬 Conversa y Recomienda</h1>
-  </header>
 
-  <section id="usuario">
-    <h2>Tu nombre de usuario</h2>
-    <input type="text" id="username" placeholder="Ingresa tu nombre" />
-    <button onclick="guardarUsuario()">Guardar</button>
-    <p id="nombreGuardado"></p>
-  </section>
+<header>
+  <h1>Mi Sitio Ecuatoriano</h1>
+  <p>💙❤️🤍 Noticias, recuerdos y cultura</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Flag_of_Ecuador.svg" alt="Bandera de Ecuador" />
+</header>
 
-  <section id="chat">
-    <h2>🌐 Chat en la página</h2>
-    <div id="mensajes"></div>
-    <input type="text" id="mensajeInput" placeholder="Escribe tu mensaje" />
-    <button onclick="enviarMensaje()">Enviar</button>
-  </section>
+<nav>
+  <button onclick="mostrar('inicio')">Inicio</button>
+  <button onclick="mostrar('noticias')">Noticias</button>
+  <button onclick="mostrar('galeria')">Galería</button>
+  <button onclick="mostrar('videos')">Videos</button>
+</nav>
 
-  <section id="recomendaciones">
-    <h2>🌟 Comentarios de Recomendaciones</h2>
-    <textarea id="recomendacionInput" placeholder="¿Qué recomiendas hoy?"></textarea>
-    <button onclick="enviarRecomendacion()">Publicar</button>
-    <div id="listaRecomendaciones"></div>
-  </section>
+<div id="inicio" class="section active">
+  <h2>Inicio</h2>
+  <p>Bienvenidos a este espacio dedicado a nuestras raíces ecuatorianas. Aquí encontrarás 
+    noticias, imágenes y momentos especiales.</p>
+</div>
 
-  <footer>
-    <p>Creado por MiguelitoEdits &copy; 2025</p>
-  </footer>
+<div id="noticias" class="section">
+  <h2>Noticias</h2>
+  <div class="subnav">
+    <button onclick="sub('locales')">Locales</button>
+    <button onclick="sub('familiares')">Familiares</button>
+  </div>
 
-  <script src="script.js"></script>
+  <div id="locales" class="subsection active">
+    <div class="noticia">....</div>
+    <div class="noticia"></div>
+    <div class="noticia"></div>
+  </div>
 
+  <div id="familiares" class="subsection">
+    <div class="noticia">.....</div>
+    <div class="noticia"></div>
+    <div class="noticia"></div>
+    <div class="noticia"></div>
+  </div>
+</div>
 
+<div id="galeria" class="section galeria">
+  <h2>Galería</h2>
+  <img src="https://via.placeholder.com/200x150?text=Fiesta" />
+  <img src="https://via.placeholder.com/200x150?text=Tradición" />
+</div>
 
+<div id="videos" class="section">
+  <h2>Video</h2>
+  <video controls>
+    <source src="video_ecuador.mp4" type="video/mp4" />
+    Tu navegador no soporta el video HTML5.
+  </video>
+</div>
 
-  <section id="noticias">
-  <h2>📰 Noticias Recientes</h2>
-  <textarea id="noticiaInput" placeholder="Escribe una noticia (usa etiquetas <p>)"></textarea>
-  <button onclick="guardarNoticia()">Publicar noticia</button>
-  <div id="noticiaPublicada" style="margin-top:1rem;"></div>
-</section>
+<footer>
+  &copy; 2025 Mi Sitio Ecuatoriano
+</footer>
 
+<script>
+  function mostrar(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.subsection').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const firstSub = document.getElementById(id).querySelector('.subsection');
+    if (firstSub) firstSub.classList.add('active');
+  }
+  function sub(id) {
+    document.querySelectorAll('.subsection').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+</script>
 
-<h1><font size="9"><center>NOTICIAS ABAJO</center></font></h1>
-
-   <p>2/8/2025</p>
-  <p>Nueva pagina web de MiguelitoEdits VIVAAA</p>
-
-  <p></p>
-   <p>hola 10/07/2025</p>
-   <p>.</p>
-   <p></p>
-   <p>4/7/2025</p>
-   <p>kk</p>
-   <p></p>
-   <p>.</p>
-   <p></p>
- <p></p>
-   <p></p>
-   <p>.</p>
-   <p></p>
- <p></p>
-   <p></p>
-   <p>.</p>
-   <p></p>
-   <p></p>
-   <p></p>
-   <p>.</p>
-   <p></p>
 </body>
 </html>
-
