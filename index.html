@@ -3,29 +3,6 @@
 <head>
 
   
-<!-- Firebase SDK -->
-<script src="https://firebase.google.com/docs/web/setup#available-libraries"></script>
-<script src=""></script>
-
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyDlSVrUJhWNU7yqM3pbZNEE7hVTkHfk8aQ",
-    authDomain: "leonuspro500.firebaseapp.com",
-    projectId: "leonuspro500",
-    storageBucket: "leonuspro500.firebasestorage.app",
-    messagingSenderId: "792513215051",
-    appId: ":792513215051:web:8053596f7fa633cd85abce"
-    measurementId: "G-T5YL91S1ZR"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-</script>
-  
-
-
-  
-  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mi Sitio Ecuatoriano</title>
@@ -194,64 +171,10 @@
     });
   }
 </script>
-
-
-
-
-
-
-
-<script>
-  function guardarMensaje(e) {
-    e.preventDefault();
-    const nombre = document.getElementById("nombre").value;
-    const correo = document.getElementById("correo").value;
-    const mensaje = document.getElementById("mensaje").value;
-
-    db.collection("mensajes").add({
-      nombre: nombre,
-      correo: correo,
-      mensaje: mensaje,
-      fecha: new Date().toISOString()
-    }).then(() => {
-      alert("Mensaje enviado correctamente");
-      e.target.reset();
-    }).catch(error => {
-      console.error("Error al guardar:", error);
-    });
-  }
-</script>
-
-
-
-
-
-<script>
-  function verMensajes() {
-    const clave = document.getElementById("codigo").value;
-    if (clave !== "triunfo2025") {
-      alert("Código incorrecto");
-      return;
-    }
-
-    db.collection("mensajes").orderBy("fecha", "desc").get().then(snapshot => {
-      const contenedor = document.getElementById("mensajes");
-      contenedor.innerHTML = "";
-      snapshot.forEach(doc => {
-        const m = doc.data();
-        contenedor.innerHTML += `
-          <div style="background:#fff; padding:10px; margin:10px 0; border-left:4px solid #0033a0; border-radius:5px;">
-            <strong>${m.nombre}</strong> (${m.correo})<br>
-            <em>${new Date(m.fecha).toLocaleString()}</em><br>
-            <p>${m.mensaje}</p>
-          </div>
-        `;
-      });
-    });
-  }
   
 </body>
 </html>
+
 
 
 
